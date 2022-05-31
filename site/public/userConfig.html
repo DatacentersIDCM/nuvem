@@ -236,7 +236,7 @@
   function listarInformations() {
     const idUser = sessionStorage.id;
 
-    fetch(`http://localhost:3333/usuarios/myinformation/${idUser}`, {
+    fetch(`/usuarios/myinformation/${idUser}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -273,7 +273,7 @@
   function myEmpresa() {
     const idEmpresa = sessionStorage.getItem("fk_empresa");
 
-    fetch(`http://localhost:3333/empresa/myempresa/${idEmpresa}`, {
+    fetch(`/empresa/myempresa/${idEmpresa}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -292,7 +292,7 @@
   function ListarAssinatura() {
     const idEmpresa = sessionStorage.getItem("fk_empresa");
 
-    fetch(`http://localhost:3333/empresa/myassinature/${idEmpresa}`, {
+    fetch(`/empresa/myassinature/${idEmpresa}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -347,7 +347,7 @@
       urlImg.endsWith(".jpg") ||
       urlImg.endsWith(".jpeg")
     ) {
-      fetch("http://localhost:3333/usuarios/atualizar/imagem", {
+      fetch("/usuarios/atualizar/imagem", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -403,7 +403,7 @@
     const email = campo_email.value;
     const telefone = campo_telefone.value;
 
-    fetch("http://localhost:3333/usuarios/atualizarInformation", {
+    fetch("/usuarios/atualizarInformation", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

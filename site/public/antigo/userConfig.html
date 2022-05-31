@@ -193,7 +193,7 @@
   function listarInformations() {
     const idUser = sessionStorage.ID_USUARIO;
 
-    fetch(`http://localhost:3333/usuarios/myinformation/${idUser}`, {
+    fetch(`/usuarios/myinformation/${idUser}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -222,7 +222,7 @@
   function myEmpresa() {
     const idEmpresa = sessionStorage.getItem("fk_empresa");
 
-    fetch(`http://localhost:3333/usuarios/myempresa/${idEmpresa}`, {
+    fetch(`/usuarios/myempresa/${idEmpresa}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -241,7 +241,7 @@
   function ListarAssinatura() {
     const idEmpresa = sessionStorage.getItem("fk_empresa");
 
-    fetch(`http://localhost:3333/usuarios/myassinature/${idEmpresa}`, {
+    fetch(`/usuarios/myassinature/${idEmpresa}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

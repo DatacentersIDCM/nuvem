@@ -361,7 +361,7 @@
             clearTimeout(proximaAtualizacao);
         }
 
-        fetch(`http://localhost:3333/medidas/media/${idEmpresa}`, {
+        fetch(`/medidas/media/${idEmpresa}`, {
         }).then((response) => {
             if (response.ok) {
                 response.json().then((resposta) => {
@@ -498,7 +498,7 @@
 
     function atualizarGrafico(idEmpresa, resposta, dados) {
 
-        fetch(`http://localhost:3333/medidas/mediaTempoReal/${idEmpresa}`, {
+        fetch(`/medidas/mediaTempoReal/${idEmpresa}`, {
         }).then((response) => {
             if (response.ok) {
                 response.json().then((novoRegistro) => {
@@ -558,7 +558,7 @@ if (proximaAtualizacao != undefined) {
     clearTimeout(proximaAtualizacao);
 }
 
-fetch(`http://localhost:3333/medidas/mediaTempoReal/${idEmpresa}`, {
+fetch(`/medidas/mediaTempoReal/${idEmpresa}`, {
 }).then((response) => {
     if (response.ok) {
         response.json().then((resposta) => {
@@ -695,7 +695,7 @@ setTimeout(() => atualizarGraficoGraficoMedia(idEmpresa, resposta, dados), 2000)
 
 function atualizarGraficoGraficoMedia(idEmpresa, resposta, dados) {
 
-fetch(`http://localhost:3333/medidas/mediaTempoReal/${idEmpresa}`, {
+fetch(`/medidas/mediaTempoReal/${idEmpresa}`, {
 }).then((response) => {
     if (response.ok) {
         response.json().then((novoRegistro) => {

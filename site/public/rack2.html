@@ -120,7 +120,7 @@
             clearTimeout(proximaAtualizacao);
         }
 
-        fetch(`http://localhost:3333/medidas/realtime`, {
+        fetch(`/medidas/realtime`, {
             cache: 'no-store',
             method: "POST",
             headers: {
@@ -225,7 +225,7 @@
 
     function atualizarGrafico(idEmpresa,idRack, dados) {
 
-        fetch(`http://localhost:3333/medidas/atualizartime`, { 
+        fetch(`/medidas/atualizartime`, { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -274,7 +274,7 @@
             clearTimeout(proximaAtualizacao);
         }
 
-        fetch(`http://localhost:3333/medidas/max_min_metricas`, {
+        fetch(`/medidas/max_min_metricas`, {
             cache: 'no-store',
             method: "POST",
             headers: {
@@ -399,7 +399,7 @@
 
        function atualizarGraficoMaxMin(idEmpresa,idRack, dados) {
 
-        fetch(`http://localhost:3333/medidas/max_min_metricas`, { 
+        fetch(`/medidas/max_min_metricas`, { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
