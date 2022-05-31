@@ -20,15 +20,12 @@
 
     <div class="sidebar">
         <div class="rowImg">
-
             <div class="alignTitles">
-                <h1>IDCM</h1>
-                <h4>Lucas Bispo</h4>
-                <h4>lucas@gmail.com</h4>
+                <h1 id="empresa"></h1>
+                <h4 id="nome_sobrenome"></h4>
+                <h4 id="email_user"></h4>
             </div>
-            <div class="rowTitle">
-                <img src="assets/iconFoto.svg" width="80" alt="">
-            </div>
+            <div class="rowTitle" id="imagem_user"></div>
         </div>
         <h1 class="h1Admin">Admin</h1>
         <div class="alignTitles">
@@ -272,34 +269,58 @@
                     <h1>Emergêncial</h1>
                 </div>
             </div>
+            
         </div>
-
-
-
-        <div class="cardDashboard">
-            <div class="containerGrafico">
-                <div class="titulo1">
-                    <h1>Ranks Temperatura Media</h1>
-                </div>
-                <div class="grafico1">
-                    <canvas id="graficoDados1" width="100" height="38"></canvas>
+        <div id="center">
+            <div class="cardDashboard">
+                <div class="containerGrafico">
+                    <div class="titulo1">
+                        <h1>Racks - Temperatura Média</h1>
+                    </div>
+                    <div class="grafico1">
+                        <canvas id="graficoDados1"></canvas>
+                    </div>
                 </div>
             </div>
             <div class="cardDashboard">
                 <div class="containerGrafico">
                     <div class="titulo1">
-                        <h1>Ranks Umidade Media</h1>
+                        <h1>Racks - Umidade Média</h1>
                     </div>
                     <div class="grafico1">
-                        <canvas id="graficoDados2" width="100" height="38"></canvas>
+                        <canvas id="graficoDados2" ></canvas>
                     </div>
             </div>
-
-        </div>
+        <div>
 
 </body>
 
 </html>
+
+<script>
+
+    const idUser = sessionStorage.getItem("id");
+
+    window.onload = myInfomations();
+    function myInfomations(){
+
+        fetch(`/usuarios/myinformation/${idUser}`)
+        .then((response) => {
+            response.json().then((data) => {
+                const dados = data.response[0];
+
+                empresa.innerHTML = dados.empresa;
+                nome_sobrenome.innerHTML = `${dados.nome} ${dados.sobrenome}`;
+                email_user.innerHTML = dados.email;
+                imagem_user.innerHTML = `
+                <img id="imgUser" src="${dados.imagem}" width="80" alt="">
+                `
+
+            })
+        })
+
+    }
+</script>
 
  <script>
     function screenConfig() {
@@ -310,43 +331,6 @@
         window.location.href = `login.html`
     }
 </script>
-<!--
-<script>
-    const labels = [
-        '1',
-        '2',
-        '3',
-        '4'
-    ];
-
-    const data = {
-        labels: labels,
-        label: '',
-        datasets: [{
-            backgroundColor: ['#39FF14',
-                '#9400D3',
-                '#00BFFF',
-                '#003964'],
-            borderColor: 'rgb(255, 99, 132)',
-            data: [30, 25, 10, 5, 0],
-        }]
-    };
-
-    const config = {
-        type: 'bar',
-        data,
-        options: {
-            indexAxis: 'y',
-        }
-    };
-</script>
-
-<script>
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
-</script> -->
 <script>
     const idEmpresa = sessionStorage.getItem("fk_empresa");
 
@@ -361,7 +345,7 @@
             clearTimeout(proximaAtualizacao);
         }
 
-        fetch(`http://localhost:3333/medidas/media/${idEmpresa}`, {
+        fetch(`/medidas/media/${idEmpresa}`, {
         }).then((response) => {
             if (response.ok) {
                 response.json().then((resposta) => {
@@ -381,11 +365,11 @@
     function plotarGrafico(idEmpresa, resposta) {
 
         var dados = {
-            labels: [],
+            labels: ["Dados Relevantes"],
             datasets: [
                 {
                     yAxisID: 'y-temperatura',
-                    label: 'rack1 temperatura',
+                    label: 'RACK - 1',
                     borderColor: '#FF0000',
                     backgroundColor: '#FF0000',
                     fill: false,
@@ -393,7 +377,7 @@
                 },
                 {
                     yAxisID: 'y-temperatura',
-                    label: 'rack2 temperatura',
+                    label: 'RACK - 2',
                     borderColor: '#FF2800',
                     backgroundColor: '#FF2800',
                     fill: false,
@@ -401,7 +385,7 @@
                 },
                 {
                     yAxisID: 'y-temperatura',
-                    label: 'rack3 temperatura',
+                    label: 'RACK - 3',
                     borderColor: '#FFA500',
                     backgroundColor: '#FFA500',
                     fill:false,
@@ -409,7 +393,7 @@
                 },
                 {
                     yAxisID: 'y-temperatura',
-                    label: 'rack4 temperatura',
+                    label: 'RACK - 4',
                     borderColor: '#FBA31A',
                     backgroundColor: '#FBA31A',
                     fill: false,
@@ -498,7 +482,7 @@
 
     function atualizarGrafico(idEmpresa, resposta, dados) {
 
-        fetch(`http://localhost:3333/medidas/mediaTempoReal/${idEmpresa}`, {
+        fetch(`/medidas/mediaTempoReal/${idEmpresa}`, {
         }).then((response) => {
             if (response.ok) {
                 response.json().then((novoRegistro) => {
@@ -558,7 +542,7 @@ if (proximaAtualizacao != undefined) {
     clearTimeout(proximaAtualizacao);
 }
 
-fetch(`http://localhost:3333/medidas/mediaTempoReal/${idEmpresa}`, {
+fetch(`/medidas/mediaTempoReal/${idEmpresa}`, {
 }).then((response) => {
     if (response.ok) {
         response.json().then((resposta) => {
@@ -582,7 +566,7 @@ var dados = {
     datasets: [
         {
             yAxisID: 'y-umidade',
-            label: 'rack1 umidade',
+            label: 'RACK - 1',
             borderColor: '#0000FF',
             backgroundColor: '#0000FF',
             fill: false,
@@ -590,7 +574,7 @@ var dados = {
         },
         {
             yAxisID: 'y-umidade',
-            label: 'rack2 umidade',
+            label: 'RACK - 2',
             borderColor: '#054F77',
             backgroundColor: '#054F77',
             fill: true,
@@ -598,7 +582,7 @@ var dados = {
         },
         {
             yAxisID: 'y-umidade',
-            label: 'rack3 umidade',
+            label: 'RACK - 3',
             borderColor: '#4169E1',
             backgroundColor: '#4169E1',
             fill: true,
@@ -606,7 +590,7 @@ var dados = {
         },
         {
             yAxisID: 'y-umidade',
-            label: 'rack4 umidade',
+            label: 'RACK - 4',
             borderColor: '#87CEEB',
             backgroundColor: '#87CEEB',
             fill: true,
@@ -695,7 +679,7 @@ setTimeout(() => atualizarGraficoGraficoMedia(idEmpresa, resposta, dados), 2000)
 
 function atualizarGraficoGraficoMedia(idEmpresa, resposta, dados) {
 
-fetch(`http://localhost:3333/medidas/mediaTempoReal/${idEmpresa}`, {
+fetch(`/medidas/mediaTempoReal/${idEmpresa}`, {
 }).then((response) => {
     if (response.ok) {
         response.json().then((novoRegistro) => {
